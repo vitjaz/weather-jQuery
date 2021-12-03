@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/index.css">
+  <title>Weather App JQ</title>
+</head>
+<body>
+  <div class="container">
+    <section class="headerSection">
+      <h2 class="appHeader">
+        Weather App jQuery
+      </h2>
+      
+      <label for="city">Выберите город</label>
+        <select name="city" id="city">
+          <option value="Санкт-Петербург" selected="selected">Санкт-Петербург</option>
+          <option value="Москва">Москва</option>
+          <option value="Великий Новгород">Великий Новгород</option>
+        </select>
+    </section>
+
+    <!-- Секция с погодой -->
+    <section class="wheatherSection">
+      <!-- Контейнер для карточек -->
+      <div class="wheatherContainer">
+        <!-- Главная карточка -->
+        <div class="mainBlock">
+          <div class="leftSide">
+            <img class="wheatherIcon" src="img/a02d.png" alt="Wheather Icon">
+            <b class="currentDesc">Ясно</b>
+          </div>
+          <div class="rightSide">
+            <p class="currentTemp">29&deg;</p>
+            <p class="currentAppTemp">Ощущается как 30&deg;</p>
+          </div>
+        </div>
+        <!-- Второстепенная карточка -->
+        <div class="secondaryBlock">
+          <div class="windBlock">
+            <p>Ветер</p>
+            <b>5 м/с</b>
+          </div>
+          <div class="humidityBlock">
+            <p>Влажность</p>
+            <b>66 %</b>
+          </div>
+          <div class="visibilityBlock">
+            <p>Видимость</p>
+            <b>33 км</b>
+          </div>
+        </div>
+
+        <div class="chart">
+        <canvas id="myChart" width="100" height="100"></canvas>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <footer>
+      <p>Made with 💖 in Saint-Petersburg</p>
+      <p>Alexeev Vitaly @ 2021</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+    integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

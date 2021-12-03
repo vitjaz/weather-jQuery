@@ -1,0 +1,16 @@
+{
+  "name": "weather-app-jquery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o css -recursive"
+  },
+  "author": "Vitaly Alexeev",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "jquery-ui": "^1.13.0",
+    "node-sass": "^6.0.1"
+  }
+}
