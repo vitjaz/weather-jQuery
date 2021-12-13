@@ -1,26 +1,37 @@
-const API_KEY = "c6aaee1b4d15426fa09c9609d9a1c708";
-let city = $("#city option:selected").text();
+// Загрузка данных при первой загрузке страницы
+getData($("#city option:selected").text());
 
-// При полной загрузке страницы
-$( document ).ready( function() {
-    // jquery ui
-    // Запрос погоды при выборе разных городов
-    $( "#city" ).selectmenu({
-      change: function( ) {
-        $.getJSON(`https://api.weatherbit.io/v2.0/current?city=${$("#city option:selected").text()}&lang=ru&key=${API_KEY}&include=minutely`, (resp) => {
-        updateUI(resp);
-      });
-      }
-    });
-    
-    // Запрос погоды при загрузке страницы
-    $.getJSON(`https://api.weatherbit.io/v2.0/current?city=${city}&lang=ru&key=${API_KEY}&include=minutely`, (resp) => {
-        updateUI(resp);
-      });
+$( "#city" ).selectmenu({
+    change: function() {
+      getData($("#city option:selected").text());
+    }
 });
 
+// Запрос к серверу
+function getData(city){
+  const API_KEY = "c6aaee1b4d15426fa09c9609d9a1c708";
 
-function updateUI(responce){
+  let jqXHR = $.getJSON(`https://api.weatherbit.io/v2.0/current?city=${city}&lang=ru&key=${API_KEY}&include=minutely`);
+
+        jqXHR.done(function (resp){
+          updateUIDone(resp);
+        });
+
+        jqXHR.fail(function(err){
+          updateUIFail(err);
+        });
+}
+
+// Обновление интерфейса при ошибке
+function updateUIFail(err){
+
+  // Модальное окно с описанием ошибки
+  $(".modalErr").dialog();
+  $(".modalErrText").text(`${err.statusText}, код ${err.status}`);
+}
+
+// Обновление интерфейса при успешном получении данных
+function updateUIDone(responce){
     console.log(responce);
     // Главная карточка
     $(".wheatherIcon").attr("src", `../img/${responce.data[0].weather.icon}.png`);
@@ -36,12 +47,20 @@ function updateUI(responce){
     // принимаем массив с поминутным прогнозом (сразу фильтруем чтобы получить интервал в 5 минут)
     const arrMinutely = responce.minutely.filter((el, idx) => 
       idx % 5 === 0);
-    let arrMinutelyLocalTime = [];
-    let arrMinutelyTemp = [];
-    let arrMinutelySnow = [];
-    let arrMinutelyLiquid = [];
 
-    arrMinutely.forEach(item => {
+    // Вызываем функцию отрисовки графика
+    drawChart(arrMinutely);
+}
+
+// Рисуем график
+function drawChart(arr){
+
+  let arrMinutelyLocalTime = [];
+  let arrMinutelyTemp = [];
+  let arrMinutelySnow = [];
+  let arrMinutelyLiquid = [];
+
+    arr.forEach(item => {
       arrMinutelyLocalTime.push(new Date(item.timestamp_local).toLocaleTimeString());
       arrMinutelyTemp.push(item.temp);
       arrMinutelySnow.push(Math.round(item.snow));
@@ -149,6 +168,7 @@ function updateUI(responce){
                 }
               }
             });
+
 }
 
 
