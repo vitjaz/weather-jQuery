@@ -20,3 +20,4 @@
 
 ## Демонстрация работы приложения
 [Weather App jQuery](https://jolly-lamport-18209e.netlify.app/) - Деплой на Netlify
+[Weather App jQuery](https://vitjaz.github.io/weather-jQuery/) - Деплой на GitHub Pages (не работают иконки, причина пока не найдена)
